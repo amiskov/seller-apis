@@ -131,7 +131,26 @@ def create_prices(watch_remnants, offer_ids):
 
 
 def price_conversion(price: str) -> str:
-    """Преобразовать цену. Пример: 5'990.00 руб. -> 5990"""
+    """Преобразовать цену в строку с целым числом.
+
+    Args:
+        price (str): Строка с ценой, из которой нужно убрать лишние символы.
+
+    Returns:
+        str: Строка с ценой в виде целого числа без копеек и прочих символов.
+
+    Examples:
+        >>> price_conversion("5'990.00 руб.")
+        '5990'
+        >>> price_conversion("5990")
+        '5990'
+        >>> price_conversion("руб.")
+        ''
+        >>> price_conversion(5990)
+        Traceback (most recent call last):
+        ...
+        AttributeError: 'int' object has no attribute 'split'
+    """
     return re.sub("[^0-9]", "", price.split(".")[0])
 
 
