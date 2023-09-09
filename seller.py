@@ -25,15 +25,13 @@ def get_product_list(last_id, client_id, seller_token):
         значений может быть <= 1000.
 
     Examples:
-
-        Посылаем первый запрос, last_id неизвестен, оставляем пустым:
-        get_product_list('', '<CLIENT_ID>', '<TOKEN>')
-
-        Пример ответа:
+        # Первый запрос, last_id неизвестен, оставляем пустым:
+        > get_product_list('', '<CLIENT_ID>', '<TOKEN>')
         {"items": [{"product_id": 223681945, "offer_id": "136748"}, ...]}
 
-        Используем полученный last_id для следующего запроса:
-        get_product_list('bnVсbA==', '<CLIENT_ID>', '<TOKEN>')
+        # Используем полученный last_id для следующего запроса:
+        > get_product_list('bnVсbA==', '<CLIENT_ID>', '<TOKEN>')
+        {"items": [{"product_id": 12345, "offer_id": "23455"}, ...]}
 
     .. _Ozon Seller API:
         https://docs.ozon.ru/api/seller/#operation/ProductAPI_GetProductList
@@ -97,21 +95,17 @@ def update_price(prices: list, client_id, seller_token):
         dict: Ответ сервера после обновления цен.
 
     Example:
-        Пример вызова:
-
-        update_prices(
-                [{
-                  "auto_action_enabled": "UNKNOWN",
-                  "currency_code": "RUB",
-                  "offer_id": "",
-                  "old_price": "0",
-                  "price": "1448",
-                }, ... ],
-              "<CLIENT_ID>",
-              "<TOKEN>"
+        > update_prices(
+            [{
+              "auto_action_enabled": "UNKNOWN",
+              "currency_code": "RUB",
+              "offer_id": "",
+              "old_price": "0",
+              "price": "1448",
+            }, ... ],
+            "<CLIENT_ID>",
+            "<TOKEN>"
         )
-
-        Пример ответа:
 
         {"result": [{
             "product_id": 1386,
@@ -146,9 +140,7 @@ def update_stocks(stocks: list, client_id, seller_token):
         dict: Ответ сервера после обновления остатков.
 
     Examples:
-        Пример вызова:
-
-        update_stocks(
+        > update_stocks(
             [{
                   "offer_id": "PG-2404С1",
                   "product_id": 55946,
@@ -156,8 +148,6 @@ def update_stocks(stocks: list, client_id, seller_token):
             }, ...],
             "<CLIENT_ID>",
             "<TOKEN>")
-
-        Пример ответа:
 
         {"result": [{
             "product_id": 55946,
@@ -190,10 +180,7 @@ def download_stock():
         dict: Остатки товаров с ценами и количеством.
 
     Examples:
-        download_stock()
-
-        Пример ответа (поля Код и Количество основные, прочие не используются):
-
+        > download_stock()
         [{
             "Код": 69785,
             "Количество": 4,
@@ -318,7 +305,6 @@ def divide(lst: list, n: int):
     """Разделить список lst на части по n элементов.
 
     Examples:
-
         >>> divided_gen = divide([1, 2, 3], 2)
         >>> next(divided_gen)
         [1, 2]
@@ -345,26 +331,22 @@ async def upload_prices(watch_remnants, client_id, seller_token):
         list of dict: Список словарей для обновлённых цен.
 
     Examples:
-        Пример вызова:
-
-            upload_prices(
-                [{
-                    "Код": 69785,
-                    "Количество": 4,
-                    "Цена": "5'990.00 руб.",
-                    ...
-                }, ...
-                ], "<CLIENT_ID>", "<TOKEN>")
-
-        Пример возвращаемого значения:
-
+        > upload_prices(
             [{
-              "auto_action_enabled": "UNKNOWN",
-              "currency_code": "RUB",
-              "offer_id": "",
-              "old_price": "0",
-              "price": "1448",
-            }, ... ]
+                "Код": 69785,
+                "Количество": 4,
+                "Цена": "5'990.00 руб.",
+                ...
+            }, ...
+            ], "<CLIENT_ID>", "<TOKEN>")
+
+        [{
+          "auto_action_enabled": "UNKNOWN",
+          "currency_code": "RUB",
+          "offer_id": "",
+          "old_price": "0",
+          "price": "1448",
+        }, ... ]
     """
     offer_ids = get_offer_ids(client_id, seller_token)
     prices = create_prices(watch_remnants, offer_ids)
@@ -386,26 +368,22 @@ async def upload_stocks(watch_remnants, client_id, seller_token):
         и ненулевым количеством.
 
     Examples:
-        Пример вызова:
-
-            upload_prices(
-                [{
-                    "Код": 69785,
-                    "Количество": 4,
-                    "Цена": "5'990.00 руб.",
-                    ...
-                }, ...
-                ], "<CLIENT_ID>", "<TOKEN>")
-
-        Пример возвращаемого значения:
-
+        > upload_prices(
             [{
-              "auto_action_enabled": "UNKNOWN",
-              "currency_code": "RUB",
-              "offer_id": "",
-              "old_price": "0",
-              "price": "1448",
-            }, ... ],
+                "Код": 69785,
+                "Количество": 4,
+                "Цена": "5'990.00 руб.",
+                ...
+            }, ...
+            ], "<CLIENT_ID>", "<TOKEN>")
+
+        [{
+          "auto_action_enabled": "UNKNOWN",
+          "currency_code": "RUB",
+          "offer_id": "",
+          "old_price": "0",
+          "price": "1448",
+        }, ... ],
     """
     offer_ids = get_offer_ids(client_id, seller_token)
     stocks = create_stocks(watch_remnants, offer_ids)
