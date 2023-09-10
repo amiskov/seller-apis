@@ -156,7 +156,6 @@ def update_stocks(stocks: list, client_id, seller_token):
             "errors": []
         }]}
 
-
     .. _Ozon Seller API:
         https://docs.ozon.ru/api/seller/#operation/ProductAPI_ImportProductsStocks
     """

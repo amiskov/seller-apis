@@ -72,6 +72,9 @@ def update_stocks(stocks, campaign_id, access_token):
             "status": "OK",
             "errors": [{"code": "string", "message": "string"}]
         }
+
+    .. _Передача информации об остатках
+        https://yandex.ru/dev/market/partner-api/doc/ru/reference/stocks/updateStocks
     """
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
@@ -109,6 +112,9 @@ def update_price(prices, campaign_id, access_token):
             "status": "OK",
             "errors": [{"code": "string", "message": "string"}]
         }
+
+    .. _Установка цен на товары в конкретном магазине
+        https://yandex.ru/dev/market/partner-api/doc/ru/reference/assortment/updatePrices
     """
     endpoint_url = "https://api.partner.market.yandex.ru/"
     headers = {
